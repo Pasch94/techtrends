@@ -1,0 +1,17 @@
+## Docker commands used to build the application 
+docker build . -t techtrends -f Dockerfile
+
+## Docker commands used to run the application
+docker run --rm -d -p 7111:3111 techtrends:latest
+
+## Docker commands used to get the application logs
+docker logs 23ef68
+
+## Logs from the container running the TechTrends application
+2021-06-19 11:10:05 INFO      * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+2021-06-19 11:10:08 INFO     172.17.0.1 - - [19/Jun/2021 11:10:08] "GET / HTTP/1.1" 200 -
+2021-06-19 11:10:08 INFO     172.17.0.1 - - [19/Jun/2021 11:10:08] "GET /favicon.ico HTTP/1.1" 404 -
+2021-06-19 11:10:10 INFO     Article 2020 CNCF Annual Report retrieved
+2021-06-19 11:10:10 INFO     172.17.0.1 - - [19/Jun/2021 11:10:10] "GET /1 HTTP/1.1" 200 -
+2021-06-19 11:10:12 INFO     About US page accessed
+2021-06-19 11:10:12 INFO     172.17.0.1 - - [19/Jun/2021 11:10:12] "GET /about HTTP/1.1" 200 -
