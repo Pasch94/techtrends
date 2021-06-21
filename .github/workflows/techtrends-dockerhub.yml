@@ -31,4 +31,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: pausch/techtrends:latest
+          tags: pausch94/techtrends:latest
