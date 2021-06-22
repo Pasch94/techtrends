@@ -12,4 +12,6 @@ spec:
     helm:
       valueFiles:
       - values-prod.yaml
-    path: helm 
+    path: helm
+    repoURL: https://github.com/Pasch94/techtrends
+    targetRevision: HEAD
