@@ -1,4 +1,5 @@
 import sqlite3
+import sys
 import logging
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
@@ -110,10 +111,14 @@ def metrics():
 if __name__ == "__main__":
    global db_conn_count
    db_conn_count = 0
+   log_stdout_handler = logging.StreamHandler(sys.stdout)
+   log_stderr_handler = logging.StreamHandler(sys.stderr)
    logging.basicConfig(
             format='%(asctime)s %(levelname)-8s %(message)s',
-            level=logging.INFO,
+            level=logging.DEBUG,
             datefmt='%Y-%m-%d %H:%M:%S'
             )
    logger = logging.getLogger(__name__)
+   logger.addHandler(log_stdout_handler)
+   logger.addHandler(log_stderr_handler)
    app.run(host='0.0.0.0', port='3111')
