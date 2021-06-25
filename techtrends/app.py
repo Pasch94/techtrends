@@ -5,14 +5,20 @@ import logging
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
-global db_conn_count
+
+# Define the Flask application
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your secret key'
+
+# As suggested in the project review:
+# Use the flask way of global variables
+app.config['DBCOUNTER'] = 0
 logger = None
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
-    global db_conn_count
-    db_conn_count += 1
+    app.config['DBCOUNTER'] += 1
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
     return connection
@@ -28,10 +34,6 @@ def get_post(post_id):
 
     logger.info('Article {} retrieved'.format(post["title"]))
     return post
-
-# Define the Flask application
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your secret key'
 
 # Define the main route of the web application 
 @app.route('/')
@@ -96,10 +98,9 @@ def metrics():
     connection = get_db_connection()
     posts = connection.execute('SELECT * FROM posts').fetchall()
     post_count = len(posts)
-    global db_conn_count
 
     json_response = json.dumps({
-        "db_connection_count": db_conn_count,
+        "db_connection_count": app.config['DBCOUNTER'],
         "post_count": post_count
         })
                  
