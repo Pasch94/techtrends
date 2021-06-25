@@ -23,6 +23,9 @@ def get_post(post_id):
     post = connection.execute('SELECT * FROM posts WHERE id = ?',
                         (post_id,)).fetchone()
     connection.close()
+    if not post:
+        return
+
     logger.info('Article {} retrieved'.format(post["title"]))
     return post
 
